@@ -39,8 +39,7 @@ end
 %initialize
 numMFsVec=numMFs*ones(M,1);
 R=numMFs^M; % number of rules
-C=zeros(M,numMFs); Sigma0=C; B=ones(R,M+1);%C?Sigma???????mu?sigma??????B?x????????????
-V=zeros(R,plabel);
+C=zeros(M,numMFs); Sigma0=C; B=ones(R,M+1); V=ones(R,plabel);
 for m=1:M % Initialization
     C(m,:)=linspace(min(XTrain(:,m)),max(XTrain(:,m)),numMFs);%C??
     Sigma0(m,:)=std(XTrain(:,m));%???????
@@ -177,7 +176,8 @@ for it=1:numIt
         count=count+1;
     end
     %% compute and visualize the confusion matrix
-    if (it==numIt)||(count>Maxcount)
+%     if (it==numIt)||(count>Maxcount)
+    if it==numIt
         f=ones(NTest,R); % firing level of rules
         for n=1:NTest
             for m=1:M % membership grades of MFs
